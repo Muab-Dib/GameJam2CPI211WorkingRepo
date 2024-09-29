@@ -203,7 +203,7 @@ public class chaserAi : MonoBehaviour
     IEnumerator deathRoutine() //jumpscare. Will call our death scene 
     {
         yield return new WaitForSeconds(jumpscareTime); // wait 2 seconds
-        SceneManager.LoadScene(deathScene); // reset the scene after waiting for jumpScareTime, which is 2 seconds
+        SceneManager.LoadScene("DeathScene"); // reset the scene after waiting for jumpScareTime, which is 2 seconds
     }
     #endregion
 }
