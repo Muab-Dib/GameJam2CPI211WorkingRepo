@@ -7,13 +7,14 @@ public class chaserAi : MonoBehaviour
 {
     #region VARIABLES
     public AudioSource scary;
+    public AudioSource death;
     public NavMeshAgent ai;
     public List<Transform> destinations; //our list of nodes which you can manually drag into the unity editor when you set up a node.
     public Animator aiAnim;
-    [HideInInspector] // We hide all these variables from the inspector as we don't need the player to see em, and so its more readable. DOWNSIDE: If the AI breaks, its because some of the variables here were reset. So, don't reset em.
-    public float walkSpeed, chaseSpeed, // determines the default speeds
+   // [HideInInspector] // We hide all these variables from the inspector as we don't need the player to see em, and so its more readable. DOWNSIDE: If the AI breaks, its because some of the variables here were reset. So, don't reset em.
+    public float walkSpeed = 100, chaseSpeed = 140, // determines the default speeds
         minIdleTime = 2, maxIdleTime = 9, idleTime, raycastDistance, // determines how long it'll be idle for, and how far it can see out
-        catchDistance, chaseTime, minChaseTime = 10, maxChaseTime = 20, // this determines how close the monster can be before it can hit the player, and how long it'll chase the player when the player loses its sight (aka, how long the player must remain
+        catchDistance = 3, chaseTime, minChaseTime = 10, maxChaseTime = 20, // this determines how close the monster can be before it can hit the player, and how long it'll chase the player when the player loses its sight (aka, how long the player must remain
         // outside its LoS so the chase will end)
         jumpscareTime, dist, // the dist determines the distance from the monster and the player
         investigateTime, minInvestigateTime = 5, maxInvestigateTime = 10, // this indicates how long the monster will be interested in investigating a noise before it returns to its original pathing
@@ -44,6 +45,7 @@ public class chaserAi : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        
         Vector3 direction = (player.position - transform.position).normalized; // we get the direction of the monster
         PlayerNoiseLvl = player.root.GetComponent<FirstPersonMovement>().noiseLvl; // Get the noise level from the player class.
         dist = Vector3.Distance(player.position, transform.position); // we determine the distance from the player and the monster
@@ -98,7 +100,7 @@ public class chaserAi : MonoBehaviour
                     aiAnim.ResetTrigger("walk"); //stopping all other animations to make sure kill animation plays
                     aiAnim.ResetTrigger("idle");
                     aiAnim.ResetTrigger("chase");
-                    aiAnim.SetTrigger("kill");
+                    aiAnim.SetTrigger("jumpscare");
                     StartCoroutine(deathRoutine()); //calls death routine which only happens once (reason why we do not need to check for a stop)
                     chasing = false;
                 }
@@ -202,8 +204,10 @@ public class chaserAi : MonoBehaviour
     #region DEATHROUTINE
     IEnumerator deathRoutine() //jumpscare. Will call our death scene 
     {
+        scary.Stop();
+        death.Play();
         yield return new WaitForSeconds(jumpscareTime); // wait 2 seconds
-        SceneManager.LoadScene(deathScene); // reset the scene after waiting for jumpScareTime, which is 2 seconds
+        SceneManager.LoadScene("Levels"); // reset the scene after waiting for jumpScareTime, which is 2 seconds
     }
     #endregion
 }

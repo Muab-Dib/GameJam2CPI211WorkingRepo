@@ -16,9 +16,9 @@ public class FirstPersonMovement : MonoBehaviour
     [HideInInspector]
     public float runCost = 20; // this is how much stamina it costs to run.
     [HideInInspector]
-    public float speed = 5; // this is the walking speed
+    public float speed = 9; // this is the walking speed
     [HideInInspector]
-    public float runSpeed = 9; // this is the running speed.
+    public float runSpeed = 16; // this is the running speed.
     public int noiseLvl; // this is how much noise they make, it determines if the monster "hears" the player by checking if this variable is larger than their distance. Cuz if it is, then they should hear them.
     [Header("Running")]
     public bool canRun = true; // determines if the player can run
