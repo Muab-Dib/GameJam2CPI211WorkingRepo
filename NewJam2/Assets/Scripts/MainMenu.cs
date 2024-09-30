@@ -10,9 +10,16 @@ public class MainMenu : MonoBehaviour
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
         // alternate way to call a particular screen
+<<<<<<< Updated upstream
         SceneManager.LoadScene("MonsterScene");
     }
 
+=======
+        SceneManager.LoadScene("Levels");
+    }
+
+    // add start function for mouse spawn
+>>>>>>> Stashed changes
     void Start()
     {
         Cursor.visible = true; // Show the cursor
