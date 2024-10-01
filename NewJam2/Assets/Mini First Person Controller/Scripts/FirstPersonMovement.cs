@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class FirstPersonMovement : MonoBehaviour
 {
     #region VARIABLES
+    public AudioSource slash;
     [SerializeField]
     public int CurrHealth = 3; // the health system. Three strikes and yer out
     [SerializeField]
@@ -13,8 +14,8 @@ public class FirstPersonMovement : MonoBehaviour
     [HideInInspector]
     public const float MAXSTAMINA = 100; // this variable NEVER changes.
     public float chargeStamina = 15; // I made this public and visible cuz it keeps going to 0? Odd.
-    [HideInInspector]
-    public float runCost = 20; // this is how much stamina it costs to run.
+
+    public float runCost = 2; // this is how much stamina it costs to run.
     [HideInInspector]
     public float speed = 9; // this is the walking speed
     [HideInInspector]
@@ -49,6 +50,7 @@ public class FirstPersonMovement : MonoBehaviour
     {
         if(CurrHealth > 0)
         {
+            slash.Play();
             CurrHealth--;
             checkHP();
         }

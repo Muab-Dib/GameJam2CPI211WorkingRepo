@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Monster
   - Trap
+  - Key
   layers:
   - Default
   - TransparentFX

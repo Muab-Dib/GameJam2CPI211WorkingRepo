@@ -207,7 +207,6 @@ public class chaserAi : MonoBehaviour
         scary.Stop();
         death.Play();
         yield return new WaitForSeconds(jumpscareTime); // wait 2 seconds
-        SceneManager.LoadScene("Levels"); // reset the scene after waiting for jumpScareTime, which is 2 seconds
     }
     #endregion
 }
